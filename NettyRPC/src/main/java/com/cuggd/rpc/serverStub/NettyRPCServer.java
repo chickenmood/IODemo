@@ -33,7 +33,8 @@ public class NettyRPCServer {
                                     //编码器
                                     pipeline.addLast("encoder", new ObjectEncoder());
                                     //解码器
-                                    pipeline.addLast("decoder", new ObjectDecoder(Integer.MAX_VALUE, ClassResolvers.cacheDisabled(null)));
+                                    pipeline.addLast("decoder", new ObjectDecoder(Integer.MAX_VALUE,
+                                            ClassResolvers.cacheDisabled(null)));
                                     //服务器端业务处理类
                                     pipeline.addLast(new InvokeHandler());
                                 }

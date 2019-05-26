@@ -14,7 +14,10 @@ import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 
-//客户端代理类
+
+/**
+ * 客户端代理类
+ */
 public class NettyRPCProxy {
     //根据接口创建代理对象
     public static Object create(Class target) {
@@ -43,7 +46,8 @@ public class NettyRPCProxy {
                                     //编码器
                                     pipeline.addLast("encoder", new ObjectEncoder());
                                     //解码器  构造方法第一个参数设置二进制数据的最大字节数  第二个参数设置具体使用哪个类解析器
-                                    pipeline.addLast("decoder", new ObjectDecoder(Integer.MAX_VALUE, ClassResolvers.cacheDisabled(null)));
+                                    pipeline.addLast("decoder", new ObjectDecoder(Integer.MAX_VALUE,
+                                            ClassResolvers.cacheDisabled(null)));
                                     //客户端业务处理类
                                     pipeline.addLast("handler", resultHandler);
                                 }

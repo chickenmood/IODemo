@@ -2,15 +2,22 @@ package com.cuggd.rpc.serverStub;
 
 import java.io.Serializable;
 
-//封装类信息
+/**
+ * 封装类信息
+ * （服务调用方想要调用服务提供方的哪个类的哪个方法，参数类型和参数值是什么）
+ */
 public class ClassInfo implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private String className;  //类名
-    private String methodName;//方法名
-    private Class<?>[] types; //参数类型
-    private Object[] objects;//参数列表
+    //类名
+    private String className;
+    //方法名
+    private String methodName;
+    //参数类型
+    private Class<?>[] types;
+    //参数列表
+    private Object[] objects;
 
     public String getClassName() {
         return className;
