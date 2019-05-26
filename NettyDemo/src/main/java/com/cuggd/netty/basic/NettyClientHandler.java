@@ -18,6 +18,7 @@ public class NettyClientHandler extends ChannelInboundHandlerAdapter {
      */
     public void channelActive(ChannelHandlerContext ctx) {
         System.out.println("Client:" + ctx);
+        //利用上下文往服务端channel上发一条消息（从服务端链的开始往后传递）。传给服务端
         ctx.writeAndFlush(Unpooled.copiedBuffer("老板，还钱吧", CharsetUtil.UTF_8));
     }
 

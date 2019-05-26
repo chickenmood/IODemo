@@ -10,10 +10,14 @@ import io.netty.handler.codec.string.StringEncoder;
 
 import java.util.Scanner;
 
-//聊天程序客户端
+/**
+ * 聊天程序客户端
+ */
 public class ChatClient {
-    private final String host; //服务器端IP地址
-    private final int port;  //服务器端端口号
+    //服务器端IP地址
+    private final String host;
+    //服务器端端口号
+    private final int port;
 
     public ChatClient(String host, int port) {
         this.host = host;
@@ -42,11 +46,14 @@ public class ChatClient {
             ChannelFuture cf=bootstrap.connect(host,port).sync();
             Channel channel=cf.channel();
             System.out.println("------"+channel.localAddress().toString().substring(1)+"------");
+
+            //程序会一直在这里（类似于死循环）等待用户的输入
             Scanner scanner=new Scanner(System.in);
             while (scanner.hasNextLine()){
                 String msg=scanner.nextLine();
                 channel.writeAndFlush(msg+"\r\n");
             }
+
         } catch (Exception e) {
             e.printStackTrace();
         } finally {

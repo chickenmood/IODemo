@@ -31,7 +31,7 @@ public class NettyServerHandler extends ChannelInboundHandlerAdapter {
     @Override
     public void channelReadComplete(ChannelHandlerContext ctx){
         //Unpooled为缓冲区工具类
-        //利用上下文往channel上发一条消息（出站），传给客户端。
+        //利用上下文往客户端channel上发一条消息（从客户端链的开始往后传递）。传给客户端。
         ctx.writeAndFlush(Unpooled.copiedBuffer("就是没钱",CharsetUtil.UTF_8));
     }
 

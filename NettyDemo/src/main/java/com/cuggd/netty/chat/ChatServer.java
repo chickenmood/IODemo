@@ -8,10 +8,12 @@ import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.codec.string.StringDecoder;
 import io.netty.handler.codec.string.StringEncoder;
 
-//聊天程序服务器端
+/**
+ * 聊天程序服务器端
+ */
 public class ChatServer {
-
-    private int port; //服务器端端口号
+    //服务器端端口号
+    private int port;
 
     public ChatServer(int port) {
         this.port = port;
@@ -29,17 +31,17 @@ public class ChatServer {
                     .childHandler(new ChannelInitializer<SocketChannel>() {
                         @Override
                         public void initChannel(SocketChannel ch) {
-                            ChannelPipeline pipeline=ch.pipeline();
+                            ChannelPipeline pipeline = ch.pipeline();
                             //往pipeline链中添加一个解码器
-                            pipeline.addLast("decoder",new StringDecoder());
+                            pipeline.addLast("decoder", new StringDecoder());
                             //往pipeline链中添加一个编码器
-                            pipeline.addLast("encoder",new StringEncoder());
+                            pipeline.addLast("encoder", new StringEncoder());
                             //往pipeline链中添加自定义的handler(业务处理类)
                             pipeline.addLast(new ChatServerHandler());
-        }
-    });
+                        }
+                    });
             System.out.println("Netty Chat Server启动......");
-    ChannelFuture f = b.bind(port).sync();
+            ChannelFuture f = b.bind(port).sync();
             f.channel().closeFuture().sync();
         } finally {
             workerGroup.shutdownGracefully();
